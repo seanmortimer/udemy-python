@@ -7,7 +7,7 @@ print(x)
 print(y + 4)
 
 name = "Sam"
-greeting = f"Hello, {name}" 
+greeting = f"Hell, {name}" 
 
 print(greeting)
 

@@ -43,12 +43,10 @@ class Store:
 
 
 store = Store('Sean')
-
 store.add_item('Apple', 10)
 store.add_item('Banana', 20)
 
 print(store.stock_price())
-
 print('')
 
 
