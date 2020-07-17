@@ -9,7 +9,7 @@ pytest = "*"
 pytest-watch = "*"
 
 [packages]
-
+flask = "*"
 
 [requires]
 python_version = "3.8"
