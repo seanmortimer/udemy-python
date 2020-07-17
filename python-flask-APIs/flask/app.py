@@ -1,15 +1,30 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
-stores = [{
-    'name': 'Sean\'s Store',
-    'items': [{
-        'name': 'Apple',
-        'price': 15.99,
-    }]
-}]
+stores = [
+    {
+        'name': 'sean',
+        'items': [{
+            'name': 'Apple',
+            'price': 15.99,
+    }],
+    },
+    {
+        'name': 'Sean\'s Store',
+        'items': [
+            {
+                'name': 'Banana',
+                'price': 12.49
+            }
+        ]
+    }
+    ]
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+    
 @app.route('/store', methods=['POST']) 
 def create_store():
     request_data = request.get_json()
@@ -17,11 +32,12 @@ def create_store():
         'name': request_data['name'],
         'items': []
     }
+    # print('new_store:', new_store)
     stores.append(new_store)
-    return jsonify(stores)
+    return jsonify(new_store)
 
 @app.route('/store/<string:name>')
-def get_store():
+def get_store(name):
     for store in stores:
         if store['name'] == name:
             return jsonify(store)
@@ -40,7 +56,7 @@ def create_item_in_store(name):
                 'name': request_data['name'],
                 'price': request_data['price']
             }
-            store.['items'].append(new_item)
+            store['items'].append(new_item)
             return jsonify(new_item)
 
     return jsonify({'message': 'Store not found'})
